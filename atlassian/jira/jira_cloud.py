@@ -9,11 +9,12 @@ from typing import Any, Dict, List, Optional, Union
 
 from ..rest_client import AtlassianRestAPI
 from .core_methods import JiraCloudCoreMethods
+from .issue_copy import IssueCopyMixin
 from .service_management_methods import JiraServiceManagementMethods
 from .software_methods import JiraSoftwareMethods
 
 
-class JiraCloud(JiraCloudCoreMethods, AtlassianRestAPI):
+class JiraCloud(IssueCopyMixin, JiraCloudCoreMethods, AtlassianRestAPI):
     """Jira Cloud platform (Core) REST API client for version 2 or 3.
 
     Use ``api_version=3`` for new integrations; version 2 is retained for

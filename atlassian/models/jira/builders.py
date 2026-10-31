@@ -36,6 +36,11 @@ class IssueBuilder(Generic[T]):  # pylint: disable=too-many-public-methods
         self._fields.project = Project(key=key, id=id_)
         return self
 
+    def issue_type(self, name: Optional[str] = None, *, id_: Optional[str] = None) -> IssueBuilder[T]:
+        """Set the issue type explicitly. Needed for type names without a dedicated model."""
+        self._fields.issue_type = IssueType(name=name, id=id_)
+        return self
+
     def summary(self, text: str) -> IssueBuilder[T]:
         self._fields.summary = text
         return self
@@ -107,6 +112,10 @@ class IssueBuilder(Generic[T]):  # pylint: disable=too-many-public-methods
 
     def affected_versions(self, *names: str) -> IssueBuilder[T]:
         self._fields.affected_versions = [Version(name=n) for n in names]
+        return self
+
+    def add_affected_version(self, name: Optional[str] = None, *, id_: Optional[str] = None) -> IssueBuilder[T]:
+        self._fields.affected_versions.append(Version(name=name, id=id_))
         return self
 
     def parent(self, key: Optional[str] = None, *, id_: Optional[str] = None) -> IssueBuilder[T]:

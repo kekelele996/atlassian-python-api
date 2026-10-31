@@ -19,11 +19,12 @@ else:
 from ..errors import ApiNotFoundError, ApiPermissionError
 from ..rest_client import AtlassianRestAPI
 from ..typehints import T_id, T_resp_json, copy_type
+from .issue_copy import IssueCopyMixin
 
 log = logging.getLogger(__name__)
 
 
-class Jira(AtlassianRestAPI):
+class Jira(IssueCopyMixin, AtlassianRestAPI):
     """
     Provide permission information for the current user.
     Reference: https://docs.atlassian.com/software/jira/docs/api/REST/8.5.0/#api/2
